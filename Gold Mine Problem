@@ -1,0 +1,56 @@
+//https://practice.geeksforgeeks.org/problems/gold-mine-problem/0/?fbclid=IwAR269gOZRluU1mumVUuva3tr85BLc70D-siGwNzPP4bfLF6d1Hskfz-Wc0A
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+//Silver_lining 
+class GFG {
+	public static void main (String[] args) {
+	    
+	    
+	    int T , n , m; 
+	    Scanner in = new Scanner ( System.in ) ; 
+	    T= in.nextInt() ; 
+	    while ( T-- > 0 )
+	    {
+	        int ans = 0 ; 
+	        n = in.nextInt() ;
+	        m = in.nextInt() ; 
+	        int dp [ ] [ ] = new int [ n ] [ m ] ; 
+	        for ( int i = 0 ; i < n ; i ++ )
+	        {
+	            for ( int j = 0 ; j < m ; j ++ )
+	            {
+	                dp [ i ] [ j ] = in.nextInt() ; 
+	            }
+	        }
+	        
+	        for ( int i = 0 ; i < m ; i ++ )
+	        {
+	            for ( int j = 0 ;  j <  n ; j ++ )
+	            {
+	                int x , y , z ; 
+	                if ( i - 1 >= 0 && j - 1 >= 0 )
+	                    x = dp [ j - 1 ] [ i - 1 ] ;
+	               else
+	                    x = 0 ; 
+	                    
+	               if ( i - 1 >= 0 )
+	                    y = dp [ j ] [ i - 1 ] ; 
+	               else 
+	                    y = 0 ; 
+	               
+	               if ( j + 1 < n && i - 1 >= 0 )
+	                    z = dp [ j + 1 ] [ i - 1 ] ; 
+	               else 
+	                    z = 0 ; 
+	               int zz = Math.max (  y ,  z );
+	               dp [ j ][ i ] =  dp [ j  ] [ i  ] +  Math.max ( x , zz  ) ; 
+	               ans = Math.max ( ans , dp [ j ] [ i ] ) ; 
+	            }
+	        }
+	        System.out.println ( ans ) ; 
+	      
+	    }
+		//code
+	}
+}
