@@ -1,0 +1,27 @@
+//https://practice.geeksforgeeks.org/problems/friends-pairing-problem/0/?fbclid=IwAR269gOZRluU1mumVUuva3tr85BLc70D-siGwNzPP4bfLF6d1Hskfz-Wc0A
+#include <bits/stdc++.h>
+using namespace std;
+//Silver_lining 
+const long long int MOD = 1e9 + 7 ; 
+int main() {
+    
+    
+    int T ; 
+    cin >> T ; 
+    int Dp [ 101 ] ; 
+    Dp [ 1 ] = 1 ; 
+    Dp [ 2 ] = 2 ;
+    for ( int i = 3 ; i <101 ; i ++ ) 
+    {
+        int x = ( ( ( i -1 ) %MOD  )* ( Dp [ i - 2 ] % MOD ) ) % MOD ; 
+        Dp [ i ] =  ( Dp [ i - 1 ]  % MOD   +  x % MOD  ) % MOD  ; 
+    }
+    while ( T-- )
+    {
+        int n ; 
+        cin >> n ; 
+        cout <<  Dp [ n ]  << endl ; 
+    }
+	//code
+	return 0;
+}
