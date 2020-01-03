@@ -1,0 +1,54 @@
+//https://practice.geeksforgeeks.org/problems/subset-sum-problem/0/?fbclid=IwAR269gOZRluU1mumVUuva3tr85BLc70D-siGwNzPP4bfLF6d1Hskfz-Wc0A
+
+#include <bits/stdc++.h>
+using namespace std;
+//Silver_lining 
+int main() {
+    
+    
+    int T ; 
+    cin >>  T ; 
+    while ( T-- )
+    {
+        int n , sum = 0  ; 
+        cin >> n ;
+        int arr [ n + 1 ] ; 
+        arr [ 0 ] = 0 ; 
+        for ( int i = 1 ;  i <= n ; i ++ )
+        {
+            cin >> arr [ i ] ; 
+            sum += arr [ i ] ; 
+        }
+        sort ( arr , arr + n + 1  ) ; 
+        if ( sum % 2 )
+        {
+            cout << "NO"<< endl ; 
+            continue ; 
+        } 
+        int m = sum / 2  ;  
+        bool  Dp [ m + 1 ] [ n + 1 ] ;
+        for ( int i = 0 ; i <= m ; i ++ )
+            Dp [ i ] [ 0 ] = 0 ; 
+        for ( int i = 0  ; i <= n  ; i ++ )
+            Dp [ 0 ] [ i ] = 1 ; 
+       
+        for ( int i = 1 ; i <= m ; i ++ )
+        {
+            for ( int j = 1 ; j <= n ; j ++ )
+            {
+                Dp [ i ] [ j ] = Dp [ i ] [ j - 1 ] ;
+                
+                if ( i  - arr [ j ] >= 0 )
+                    Dp [ i ] [ j ]  =  Dp [ i ] [ j ] or Dp [  i  - arr [ j ] ] [ j - 1 ] ;
+            }
+           
+        }
+      
+        if ( Dp [ m ] [ n ] )
+            cout << "YES" << endl ; 
+        else 
+            cout << "NO" << endl ; 
+    }
+	//code
+	return 0;
+}
