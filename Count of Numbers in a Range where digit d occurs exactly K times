@@ -1,0 +1,86 @@
+//https://www.geeksforgeeks.org/count-of-numbers-in-a-range-where-digit-d-occurs-exactly-k-times/
+
+
+
+#include<bits/stdc++.h> 
+using namespace  std ; 
+int dp [ 1001 ] [ 2 ][ 1001 ] ; 
+
+int util ( int index , int flag , int c , int arr[] , int n , int d , int x  )
+{
+	if ( index < 0  )
+	{
+		if ( c == d ) 
+			return 1 ; 
+		return 0 ; 
+	}
+	//if ( dp [ index ] [ flag ] [ c ] != -1 ) 
+		//return dp [ index ] [ flag ] [ c ] ; 
+	int ans = 0 ; 
+	
+	if( flag )
+	{
+		for ( int i = 0 ; i <=9 ; i ++ )
+		{
+			if ( i == x )
+				ans += util ( index - 1 , flag , c  + 1  , arr , n , d , x ) ;
+			else 
+				ans += util ( index - 1 , flag , c  , arr , n , d , x ) ;
+				
+				 
+		}
+		
+	}
+	else 
+	{
+		for ( int i = 0 ; i < arr [ index ]  ; i ++ )
+		{
+			if ( i == x )
+				ans += util ( index - 1 , 1 , c  + 1  , arr , n , d , x ) ;
+			else 
+				ans += util ( index - 1 , 1 , c    , arr , n , d , x ) ;
+				
+			
+		}
+		
+		if ( arr [ index ]  == x )
+				ans += util ( index - 1 , 0 , c  + 1  , arr , n , d , x ) ;
+		else 
+				ans += util ( index - 1 , 0 , c , arr , n , d , x ) ;
+				
+		
+	}
+	
+	return ans ; 
+	return dp [ index ] [ flag ] [ c ] = ans ; 
+}
+int cal ( int x , int d , int count )
+{	
+	
+	int n =  floor ( log10(x ) + 1 ) ;
+	int arr [ n ] ;
+	for ( int i = 0; i  < n   ; i ++  )
+	{
+		arr [ i ] = x % 10 ; 
+		x= x / 10 ; 
+	} 
+	
+	for ( int i = n - 1 ; i >= 0 ;  i -- ) 
+		cout << arr [ i ] << " " ; 
+	cout << endl ; 
+	return util ( n - 1  , 0 , 0 , arr , n , count , d ) s; 
+		
+}
+int main()
+{
+
+	int l , r , d , count ; 
+	cin >> l >>r >>  d >> count ; 
+	memset ( dp , -1 , sizeof (dp) ) ; 
+	cout << cal (  r, d , count  ) - cal ( l - 1  , d , count ) ; 
+	
+	
+	
+	
+	
+}
