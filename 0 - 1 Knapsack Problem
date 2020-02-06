@@ -1,0 +1,41 @@
+//https://practice.geeksforgeeks.org/problems/0-1-knapsack-problem/0
+
+
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll ; 
+int dp [ 1000+ 1  ] [ 1000 + 1  ] ;
+int cal ( int index , int W , int n , int value [] , int weight [] )
+{
+    if ( index == n or W <= 0 )
+        return 0 ; 
+    if ( dp [ index ] [ W ] != - 1 )
+        return dp [ index ] [ W ] ; 
+    int left = 0 ; 
+    if ( weight [ index ] <= W )
+        left = cal ( index + 1 , W - weight [ index] , n , value , weight ) + value [ index ]; 
+        
+    int right = cal ( index + 1 , W , n , value , weight) ; 
+    return dp [ index ] [ W ] = max (  left, right  ) ; 
+}
+int main() {
+    
+    
+    
+    int T ; 
+    cin >> T ;
+    while ( T-- )
+    {
+        int n , W ; 
+        cin >> n >> W ; 
+        memset ( dp , -1 , sizeof ( dp ) ) ; 
+        int value [ n ] , weight [ n ] ; 
+        for ( int i = 0 ; i < n ; i ++ )
+            cin >> value [ i ] ; 
+        for ( int i = 0 ; i < n ; i ++ )
+            cin >> weight [ i ] ;
+        cout << cal  ( 0 , W , n , value , weight ) << endl ; 
+    }
+	//code
+	return 0;
+}
