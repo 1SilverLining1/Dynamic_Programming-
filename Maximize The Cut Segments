@@ -1,0 +1,32 @@
+//https://practice.geeksforgeeks.org/problems/cutted-segments/0/
+
+
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll ; 
+int main() {
+    
+    int t ; 
+    cin >> t ; 
+    while ( t-- )
+    {
+        ll n , x , y , z ; 
+        cin >> n >> x >> y >> z ; 
+        int dp [4001 ]  ; 
+        memset ( dp , 0 , sizeof ( dp ) ) ; 
+        dp [ x ] = dp [ y] = dp [ z ] = 1 ;  
+        for ( int i = 1 ; i <= n ; i ++ )
+        {
+            if ( i - x >= 0 and dp [ i - x ] )
+                dp[ i ] = max ( dp [ i ] ,  dp [ i - x ] + 1 )  ; 
+            if ( i - y >= 0 and dp [ i - y ])
+                dp [ i ] = max ( dp [ i ] ,  dp [ i - y ] + 1) ; 
+            if ( i- z >= 0 and dp [ i - z ])
+                dp [ i ] = max ( dp [ i ] ,   dp [ i - z ] + 1 ) ; 
+        }
+        
+        cout << dp [ n ] << endl ; 
+    }
+	//code
+	return 0;
+}
