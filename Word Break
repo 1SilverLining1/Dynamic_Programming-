@@ -1,0 +1,42 @@
+//https://leetcode.com/problems/word-break/
+
+class Solution {
+public:
+    
+    int dp[ 10001 ] ; 
+    
+    bool util ( int start , int n , vector < string > wordDict , string s  )
+    {
+    
+        if( start >= n )
+                return 1 ; 
+        if ( dp [ start  ] != -1 )
+                return dp [ start ] ; 
+        for ( int i = 0 ; i < wordDict.size() ; i ++ )
+        {
+            int l = wordDict [ i ] .length() ; 
+            if ( l > n - start  )
+                    continue ;
+            
+            string temp = s.substr ( start ,  l ) ; 
+            if ( temp == wordDict [ i ] )
+            {
+                if ( util ( start + l , n , wordDict , s  ) ) 
+                {
+                    return dp [ start ] = 1 ;
+                }
+                         
+            }
+        }
+        
+        return dp [ start ] =  0 ; 
+    }
+    bool wordBreak(string s, vector<string>& wordDict) {
+        
+        memset ( dp , -1 , sizeof ( dp ) ) ; 
+        
+        return util ( 0 , s.length() , wordDict , s ) ; 
+        
+        
+    }
+};
