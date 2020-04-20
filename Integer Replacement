@@ -1,0 +1,29 @@
+//https://leetcode.com/problems/integer-replacement/
+
+
+class Solution {
+public:
+    
+    
+    
+    map < long long int , long long int > dp ; 
+    long long  util ( long long i )
+    {
+        if ( dp. find ( i ) != dp.end()  )
+                return dp [ i ]; 
+        
+        if ( i % 2== 0 )
+                return dp [ i ] = 1 + util ( i / 2 ) ; 
+        
+        return  dp [ i ] = 1 + min ( util ( i + 1 ) , util ( i - 1 ) ) ; 
+    }
+    int integerReplacement(int n) {
+        
+        
+        dp [ 1 ] = 0 ; 
+        
+        
+        return util ( n ) ; 
+        
+    }
+};
